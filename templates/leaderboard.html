@@ -2,6 +2,7 @@
 {% block title %} Leaderboard {% endblock %}
 
 {% block content %}
+<!--
 <script src="/static/js/asserts/vue.js"></script>
 <script src="/static/js/asserts/vue-axios.js"></script>
 
@@ -12,6 +13,8 @@
 </script>
 
 <link rel="stylesheet" href="/static/css/pages/leaderboard.css">
+-->
+<!--
 
 <div id="leaderboard">
     <div class="leaderboard-banner main-banner">
@@ -42,11 +45,11 @@
                 <a :href="'/leaderboard/'+mode+'/pp'" @click="LoadLeaderboard('pp', mode, mods, '')"
                     :class="'simple-banner-swtich'+(sort == 'pp' ? ' switch--active' :'')">PP</a>
                 <a :href="'/leaderboard/'+mode+'/rscore'" @click="LoadLeaderboard('rscore', mode, mods, '')"
-                    :class="'simple-banner-swtich'+(sort == 'rscore' ? ' switch--active' :'')">Score</a>
+                    :class="'simple-banner-swtich'+(sort == 'rscore' ? ' switch--active' :'')">Score</a>-->
                 <!-- Disable for now? Still deciding on whether or not we should actually allow accuracy sort? Seems pointless imo.
                     <a :href="'/leaderboard/'+mode+'/acc'" @click="LoadLeaderboard('acc', mode, mods, '')"
                     :class="'simple-banner-swtich'+(sort == 'acc' ? ' switch--active' :'')">Accuracy</a>
-                -->
+                --> <!--
             </div>
             <div class="selectright">
                 <a :href="'/leaderboard/'+mode+'/'+sort+'/vn'"
@@ -112,4 +115,5 @@
 </div>
 
 <script src="/static/js/pages/leaderboard.js"></script>
+-->
 {% endblock %}
