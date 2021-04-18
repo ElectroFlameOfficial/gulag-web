@@ -21,4 +21,4 @@ CMD [ "python3.9", "./main.py" ]
 # Switch to gulag user and copy the files at the very last moment
 WORKDIR /gulag-web
 USER gulag
-COPY ./ ./
+COPY --chown=gulag:gulag ./ ./
