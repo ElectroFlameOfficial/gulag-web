@@ -7,17 +7,18 @@ RUN apt update
 COPY ./ext/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-# Create directory for gulag-web and copy the files
-RUN mkdir /gulag-web
-WORKDIR /gulag-web
-COPY ./ ./
-
 # Temporary workaround
 RUN touch /var/run/nginx.pid
 
-# Create user for gulag-web and chown
+# Create user for gulag-web and directory
 RUN addgroup --system --gid 1000 gulag && adduser --system --uid 1000 --gid 1000 gulag
-RUN chown -R gulag:gulag /gulag-web
+RUN mkdir /gulag-web && chown -R gulag:gulag /gulag-web
 
+# Expose port and set entrypoint
 EXPOSE 8080
 CMD [ "python3.9", "./main.py" ]
+
+# Switch to gulag user and copy the files at the very last moment
+WORKDIR /gulag-web
+USER gulag
+COPY ./ ./
