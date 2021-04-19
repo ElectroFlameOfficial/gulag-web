@@ -7,14 +7,21 @@
     <div class="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
       <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
         <div class="sm:text-center lg:text-left">
-          <h1 class="text-3xl tracking-tight font-medium text-gray-900 sm:text-4xl md:text-5xl">
-            <span class="block text-white xl:inline">{{ appName() }}</span>
-          </h1>
+          <div class="flex">
+            <div>
+              <img class="h-auto w-12 mr-2" src="/static/favicon/android-chrome-256x256.png" alt="">
+            </div>
+            <div>
+              <h1 class="text-3xl tracking-tight font-medium text-gray-900 sm:text-4xl md:text-5xl">
+                <span class="block text-white xl:inline">{{ appName() }}</span>
+              </h1>
+            </div>
+          </div>
           <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
             We are an osu! private server built from the ground up with many
           unique features not seen elsewhere - for more information, check
-          out <a href="http://github.com/cmyui/gulag">gulag</a>
-          and <a href="https://github.com/Yo-ru/gulag-web">{{ appName() }}</a>
+          out <a class="text-accent-200" href="http://github.com/cmyui/gulag">gulag</a>
+          and <a class="text-accent-200" href="https://github.com/Yo-ru/gulag-web">{{ appName() }}</a>
           on GitHub - we're fully open source!
           </p>
           <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
@@ -72,50 +79,7 @@
 </div>
 {% endif %}
 -->
-<!--<div class="p-8 flex flex-none flex-nowrap bg-dark-500 text-white h-72">
-  <div class="w-1/2">
-    <p>
-      We are an osu! private server built from the ground up with many
-      unique features not seen elsewhere - for more information, check
-      out <a href="http://github.com/cmyui/gulag">gulag</a>
-      and <a href="https://github.com/Yo-ru/gulag-web">gulag-web</a>
-      on GitHub - we're fully open source!
-    </p>
-  </div>
-  <div class="w-1/2">
-    <img src="/static/images/pippi.png">
-  </div>
-</div>
-
-<div class="hero splash is-padless" id="home-hero">
-  <div class="container is-flex is-lcentered">
-    <div class="columns is-vcentered is-marginless">
-      <div class="column is-size-2-desktop is-size-1-fullhd">
-        <h1 class="title is-spaced is-size-2-desktop is-size-1-fullhd">{{ appName() }}</h1>
-        <h2 class="subtitle">
-          We are an osu! private server built from the ground up with many
-          unique features not seen elsewhere - for more information, check
-          out <a href="http://github.com/cmyui/gulag">gulag</a>
-          and <a href="https://github.com/Yo-ru/gulag-web">gulag-web</a>
-          on GitHub - we're fully open source!
-        </h2>
-        {% if not session.authenticated %}
-        <div class="buttons">
-          <a class="button is-primary" href="/register">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light" href="/login">
-            Log in
-          </a>
-        </div>
-        {% endif %}
-      </div>
-      <div class="column is-flex is-lcentered is-padless" id="mascot">
-        <div class="gulag-avatar"></div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--
 
 <section class="section">
   <div class="container has-text-centered py-4">
