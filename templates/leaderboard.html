@@ -19,47 +19,46 @@
 <div id="leaderboard">
     <div class="leaderboard-banner main-banner">
         <div class="main-selector">
-            <a :href="'/lb/osu/'+sort+'/'+mods" :class="'mode-select '+(mode == 'std' ? '--selected ' : '')"
+            <a :href="'/leaderboard/osu/'+sort+'/'+mods" :class="'mode-select '+(mode == 'std' ? '--selected ' : '')"
                 @click="LoadLeaderboard(sort, 'std', mods)">
                 <i class="mode-icon mode-osu"></i><span class="modetext"> osu!</span>
             </a>
-            <a :href="'/lb/taiko/'+sort+'/'+mods"
+            <a :href="'/leaderboard/taiko/'+sort+'/'+mods"
                 :class="'mode-select '+(mode == 'taiko' ? '--selected ' : '') +(mods == 'ap' ? 'disabled':'')"
                 @click="LoadLeaderboard(sort, 'taiko', mods)">
                 <i class="mode-icon mode-taiko"></i><span class="modetext"> osu!taiko</span>
             </a>
-            <a :href="'/lb/catch/'+sort+'/'+mods"
+            <a :href="'/leaderboard/catch/'+sort+'/'+mods"
                 :class="'mode-select '+(mode == 'catch' ? '--selected ' : '') +(mods == 'ap' ? 'disabled':'')"
                 @click="LoadLeaderboard(sort, 'catch', mods)">
                 <i class="mode-icon mode-catch"></i><span class="modetext"> osu!catch</span>
             </a>
-            <a :href="'/lb/mania/'+sort+'/'+mods"
-                :class="'mode-select '+(mode == 'mania' ? '--selected ' : '') +(mods == 'ap' ? 'disabled':'') 
-                +(mods == 'rx' ? 'disabled':'')"
+            <a :href="'/leaderboard/mania/'+sort+'/'+mods"
+                :class="'mode-select '+(mode == 'mania' ? '--selected ' : '') +(mods == 'ap' ? 'disabled':'') +(mods == 'rx' ? 'disabled':'')"
                 @click="LoadLeaderboard(sort, 'mania', mods)">
                 <i class="mode-icon mode-mania"></i><span class="modetext"> osu!mania</span>
             </a>
         </div>
         <div class="banner-text">Leaderboard</div>
         <div class="selector">
-            <div class="left">
-                <a :href="'/lb/'+mode+'/pp'" @click="LoadLeaderboard('pp', mode, mods, '')"
+            <div class="selectleft">
+                <a :href="'/leaderboard/'+mode+'/pp'" @click="LoadLeaderboard('pp', mode, mods, '')"
                     :class="'simple-banner-swtich'+(sort == 'pp' ? ' switch--active' :'')">PP</a>
-                <a :href="'/lb/'+mode+'/rscore'" @click="LoadLeaderboard('rscore', mode, mods, '')"
-                    :class="'simple-banner-swtich'+(sort == 'rscore' ? ' switch--active' :'')">Score</a>
+                <a :href="'/leaderboard/'+mode+'/rscore'" @click="LoadLeaderboard('rscore', mode, mods, '')"
+                    :class="'simple-banner-swtich'+(sort == 'rscore' ? ' switch--active' :'')">Score</a>-->
                 <!-- Disable for now? Still deciding on whether or not we should actually allow accuracy sort? Seems pointless imo.
-                    <a :href="'/lb/'+mode+'/acc'" @click="LoadLeaderboard('acc', mode, mods, '')"
+                    <a :href="'/leaderboard/'+mode+'/acc'" @click="LoadLeaderboard('acc', mode, mods, '')"
                     :class="'simple-banner-swtich'+(sort == 'acc' ? ' switch--active' :'')">Accuracy</a>
                 --> <!--
             </div>
-            <div class="right">
-                <a :href="'/lb/'+mode+'/'+sort+'/vn'"
+            <div class="selectright">
+                <a :href="'/leaderboard/'+mode+'/'+sort+'/vn'"
                     :class="'simple-banner-swtich '+(mods == 'vn' ? 'switch--active' : '')"
                     @click="LoadLeaderboard(sort, mode, 'vn')">Vanilla</a>
-                <a :href="'/lb/'+mode+'/'+sort+'/rx'"
+                <a :href="'/leaderboard/'+mode+'/'+sort+'/rx'"
                     :class="'simple-banner-swtich '+(mods == 'rx' ? 'switch--active' : '')+(mode == 'mania' ? 'disabled':'')"
                     @click="LoadLeaderboard(sort, mode, 'rx')">Relax</a>
-                <a :href="'/lb/'+mode+'/'+sort+'/ap'"
+                <a :href="'/leaderboard/'+mode+'/'+sort+'/ap'"
                     :class="'simple-banner-swtich '+(mods == 'ap' ? 'switch--active' : '')+(mode == 'mania' ? 'disabled':'')+(mode == 'catch' ? 'disabled':'')+(mode == 'taiko' ? 'disabled':'')"
                     @click="LoadLeaderboard(sort, mode, 'ap')">Autopilot</a>
             </div>
@@ -84,22 +83,22 @@
                     </thead>
                     <tbody>
                         <tr v-for="(user, index) in boards" class="leaderboard-column">
-                            <td class="column-player-rank">#<% index + 1 %>
+                            <td class="t-column column-player-rank">#<% index + 1 %>
                             </td>
-                            <td class="column-player-name text-left">
+                            <td class="t-column column-player-name is-lefttext">
                                 <a :href="'/u/'+user.user_id"><% user.username %></a>
                             </td>
-                            <td v-if="sort == 'pp' || sort == 'rscore'">
+                            <td v-if="sort == 'pp' || sort == 'rscore'" class="t-column">
                                 <% (sort=='pp' ? user.pp+'pp' : "" ) %>
                                     <% (sort=='rscore' ? scoreFormat(user.rscore) : "" ) %>
                             </td>
-                            <td>
+                            <td class="t-column t-column--dimmed">
                                 <% user.acc.toFixed(2) %>%
                             </td>
-                            <td>
+                            <td class="t-column t-column--dimmed">
                                 <% addCommas(user.plays) %>
                             </td>
-                            <td>
+                            <td class="t-column t-column--dimmed">
                                 <% addCommas(user.maxcombo) %>
                             </td>
                         </tr>
@@ -107,7 +106,7 @@
                 </table>
             </div>
             <div v-else>
-                <div class="text-center">
+                <div class="is-centertext">
                     there are no scores to display!
                 </div>
             </div>
