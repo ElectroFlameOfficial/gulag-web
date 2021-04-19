@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="bruh moment">
   <meta property="og:description" content="bruh moment">
-  <meta property="og:site_name" content="{{appName()}}">
+  <meta property="og:site_name" content="{{ appName() }}">
   <meta name="theme-color" content="#E91E63">
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -31,14 +31,20 @@
   <nav class="bg-dark-700 w-full z-10 flex flex-none flex-nowrap items-center shadow-navbar px-2">
     <div class="w-1/2 text-white">
         <div class="flex float-left text-white gap-4 h-12">
-          <a class="text-4xl flex items-center" href="/">
+          <a class="transition duration-200 ease text-4xl flex 
+          transfrom hover:scale-110 items-center" href="/">
             <i class="mdi mdi-circle-slice-8"></i> <!--TODO: Change this to proper logo-->
           </a>
-          <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 {% if request.path.startswith('/leaderboard') %}text-accent-300 border-accent-300{% else %}border-transparent{% endif %}" href="/leaderboard">
+          <a class="transition duration-200 ease flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 
+          {% if request.path.startswith('/leaderboard') %}text-accent-300 border-accent-300
+          {% else %}border-transparent{% endif %}" href="/leaderboard">
             <p class="text-sm font-bold hidden md:contents 2xl:text-lg">Leaderboard</p>
             <i class="text-xl mdi mdi-poll md:hidden"></i> 
           </a>
-          <button x-data="{ open: false }" @mouseover="open = true" @mouseover.away="open = false" class="flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 appearance-none focus:outline-none {% if request.path.startswith('/doc') %}text-accent-300 border-accent-300{% else %}border-transparent{% endif %}">
+          <button x-data="{ open: false }" @mouseover="open = true" @mouseover.away="open = false" 
+          class="transition duration-200 ease flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 appearance-none 
+          focus:outline-none {% if request.path.startswith('/doc') %}text-accent-300 
+          border-accent-300{% else %}border-transparent{% endif %}">
             <p class="text-sm font-bold hidden md:contents 2xl:text-lg">Information</p>
             <i class="text-xl mdi mdi-information-outline md:hidden"></i> 
             <ul x-show="open" class="absolute z-20 mt-36 list-none text-light text-left text-sm">
@@ -81,7 +87,8 @@
           </div>
             -->
           {% if session.authenticated and session.user_data['is_staff'] %}
-          <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 {% if request.path.startswith('/admin') %}text-accent-300 border-accent-300{% else %}border-transparent{% endif %}" href="/admin">
+          <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 
+          {% if request.path.startswith('/admin') %}text-accent-300 border-accent-300{% else %}border-transparent{% endif %}" href="/admin">
             <p class="text-sm font-bold hidden md:contents 2xl:text-lg">Admin</p>
             <i class="text-xl mdi mdi-monitor-dashboard md:hidden"></i>
           </a>
@@ -111,10 +118,12 @@
           </div>
       -->
         {% else %}
-        <a class="rounded bg-dark-500 text-white py-1.5 px-3 hover:bg-dark-400 font-bold text-sm mr-3" href="/login">
+        <a class="transition duration-200 ease rounded bg-dark-500 text-white 
+        py-1.5 px-3 hover:bg-dark-400 transform hover:scale-110 font-bold text-sm mr-3" href="/login">
           Log In
         </a>
-        <a class="rounded bg-accent-500 text-white py-1.5 px-3 hover:bg-accent-800 font-bold text-sm" href="/register">
+        <a class="transition duration-200 ease rounded bg-accent-500 text-white 
+        py-1.5 px-3 hover:bg-accent-800 transform hover:scale-110 font-bold text-sm" href="/register">
           Sign Up
         </a>
         {% endif %}
@@ -129,7 +138,8 @@
     <footer class="flex flex-none flex-nowrap items-center w-full px-4 py-2 bg-dark-700">
       <div class="w-1/2">
         <div class="flex float-left text-sm text-light-900">
-          © 2021&nbsp;<a class="hover:text-accent-300" href="https://catgirl.moe">catgirl.moe</a>. All rights removed.
+          © 2021&nbsp;<a class="hover:text-accent-300" href="https://{{ domain() }}">
+            {{ domain() }}</a>. All rights removed.
         </div>
       </div>
       <div class="w-1/2">
