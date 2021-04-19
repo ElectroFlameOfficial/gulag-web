@@ -2,22 +2,15 @@
 {% block title %} 404 {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="/static/css/pages/404.css">
-<style>html {--main: 355;}</style>
-<div class="main-block">
-	<div class="title-block">
-		<span>404</span>
-		<h2 class="error-title">
-			Page not found
-		</h2>
-	</div>
-	<div class="error-block">
-		<h3 class="error-subtitle">Where am I?</h3>
-		<ol>
-      		<li>- Check that the URL you entered is correct.</li>
-      		<li>- Make sure that the place you are visiting isn't under maintenance!</li>
-      		<li></li>
-		</ol>
+<div class="flex justify-center h-full">
+	<div class="text-center text-light self-center">
+		<div>
+			<p class="text-9xl sm:text-huge leading-none font-semibold font-poppins">404</p>
+			<p class="font-poppins">Oops something went wrong</p>
+		</div>
+		<div class="mt-4">
+			<a class="rounded text-light bg-dark-700 py-1.5 px-3 hover:bg-dark-600 font-semibold text-sm" href="/">Back to Home <i class="mdi mdi-home"></i></a>
+		</div>
 	</div>
 </div>
 {% endblock %}
