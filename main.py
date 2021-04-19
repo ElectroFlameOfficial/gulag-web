@@ -116,4 +116,4 @@ run app - run gulag-web.
 """
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
-    app.run(debug=glob.config.debug) # blocking call
+    app.run(host='0.0.0.0', debug=glob.config.debug) # blocking call

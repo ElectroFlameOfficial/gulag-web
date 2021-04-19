@@ -1,45 +1,28 @@
+<!DOCTYPE html>
 <html>
-
 <head>
-  <!-- title -->
-  <title>{{ appName() }} - {% block title %}{% endblock %}</title>
+  <meta charset="utf-8">
+  <title>{{ appName() }} | {% block title %}{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="bruh moment">
+  <meta property="og:description" content="bruh moment">
+  <meta property="og:site_name" content="{{appName()}}">
+  <meta name="theme-color" content="#E91E63">
 
-  <!-- favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
-  <link rel="manifest" href="/static/favicon/site.webmanifest">
-  <link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#d55b9e">
-  <link rel="shortcut icon" href="/static/favicon/favicon.ico">
-  <meta name="msapplication-TileColor" content="#000000">
-  <meta name="msapplication-config" content="/static/favicon/browserconfig.xml">
-  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+  
+  <link rel="stylesheet" href="/static/css/tailwind.css">
+  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
 
-  <!-- metadata -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- jquery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"
-    integrity="sha512-/DXTXr6nQodMUiq+IUJYCt2PPOUjrHJ9wFrqpJ3XkgPNOZVfMok7cRw6CSxyCQxXn6ozlESsSh1/sMCTF1rL/g=="
-    crossorigin="anonymous"></script>
-
-  <!-- bulma -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HakuraSukinoe/bulma-hsl/bulma.min-v7.css" />
-
-  <!-- font awesome -->
-  <script src="https://kit.fontawesome.com/e5971878b8.js" crossorigin="anonymous"></script>
-
-  <!-- custom style -->
-  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 </head>
-
-<body>
-
-  <div class="modal" id="modaldisplayer">
+<body class="flex flex-col h-screen overflow-y-none">
+  <!--<div class="modal" id="modaldisplayer">
     <div class="modal-background"></div>
     <div class="modal-content">
       <div class="modaldata" id="contentmodal">
-        <!-- waiting for user click about score -->
+        waiting for user click about score
       </div>
     </div>
   </div>
@@ -87,72 +70,70 @@
               Report an issue
             </a>
           </div>
-        </div>
-
-        {% if session.authenticated and session.user_data['is_staff'] %}
-        <a class="navbar-item" href="/admin">
-          Admin
-        </a>
-        {% endif %}
-      </div>
-
-      <div class="navbar-end">
-        {% if session.authenticated %}
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            {{ session.user_data['name'] }}
+            -->
+          {% if session.authenticated and session.user_data['is_staff'] %}
+          <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 {% if request.path.startswith('/admin') %}text-accent-300 border-accent-300{% else %}border-transparent{% endif %}" href="/admin">
+            <p class="text-sm font-bold hidden md:contents 2xl:text-lg">Admin</p>
+            <i class="text-xl mdi mdi-monitor-dashboard md:hidden"></i>
           </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="/u/{{ session.user_data['id'] }}">
+          {% endif %}
+        </div>
+    </div>
+    <div class="w-1/2">
+      <div class="flex float-right">
+        {% if session.authenticated %} 
+        <button x-data="{ open: false }" @click="open = true" @click.away="open = false" class="appearance-none focus:outline-none">
+          <img class="rounded-full h-8 w-8" alt="avatar" src="https://a.{{ domain() }}/{{ session.user_data['id'] }}">
+          <p x-show="open" class="text-light absolute z-20 mt-16">henlo</p>
+        </button> 
+        <!-- TODO: make profile, settings and logout dropdown -->
+
+        <!--{{ session.user_data['name'] }} {{ session.user_data['id'] }}
+        <a class="rounded bg-accent-500 text-white py-1 px-3 hover:bg-accent-400 font-bold text-sm" href="/logout">
+          Logout
+        </a>
+      <div class="navbar-dropdown">
+            <a class="navbar-item" href="/u/">
               Profile
             </a>
             <a class="navbar-item" href="/settings">
               Settings
             </a>
           </div>
-        </div>
-        <div class="navbar-item">
-          <a class="button is-light" href="/logout">
-            Logout
-          </a>
-        </div>
+      -->
         {% else %}
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-primary" href="/register">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light" href="/login">
-              Log in
-            </a>
-          </div>
-        </div>
+        <a class="rounded bg-dark-500 text-white py-1.5 px-3 hover:bg-dark-400 font-bold text-sm mr-3" href="/login">
+          Log In
+        </a>
+        <a class="rounded bg-accent-500 text-white py-1.5 px-3 hover:bg-accent-800 font-bold text-sm" href="/register">
+          Sign Up
+        </a>
         {% endif %}
       </div>
     </div>
-    </div>
   </nav>
-
-  <!-- content -->
-  <div class="container is-fullhd my-con">
-    {% block content %}
-    {% endblock %}
-  </div>
-
-  <!-- footer -->
-  <footer class="footer">
-    <div class="content">
-      <span>{{ appName() }} <strong>v{{ appVersion() }}</strong></span>
-      <a class="foot-link" href="/github"><i class="fa fa-github"></i> GitHub</a>
-      <a class="foot-link" href="/discord"><i class="fab fa-discord"></i> Discord</a>
-      <a class="foot-link" href="/youtube"><i class="fab fa-youtube"></i> YouTube</a>
-      <a class="foot-link" href="/twitter"><i class="fab fa-twitter"></i> Twitter</a>
-      <a class="foot-link" href="/instagram"><i class="fab fa-instagram"></i> Instagram</a>
+  <div class="flex flex-col flex-1 overflow-y-auto bg-dark-800 w-full">
+    <div class="flex-grow">
+      {% block content %}
+      {% endblock %}
     </div>
-  </footer>
-
-  <!-- main js script -->
-  <script src="/static/js/main.js" crossorigin="anonymous"></script>
+    <footer class="flex flex-none flex-nowrap items-center w-full px-4 py-2 bg-dark-700">
+      <div class="w-1/2">
+        <div class="flex float-left text-sm text-light-900">
+          © 2021&nbsp;<a class="hover:text-accent-300" href="https://catgirl.moe">catgirl.moe</a>. All rights removed.
+        </div>
+      </div>
+      <div class="w-1/2">
+        <div class="flex float-right gap-4 text-lg text-light-900">
+          <a class="hover:text-accent-300" href="/github"><i class="mdi mdi-github"></i></a>
+          <a class="hover:text-accent-300" href="/discord"><i class="mdi mdi-discord"></i></a>
+          <a class="hover:text-accent-300" href="/youtube"><i class="mdi mdi-youtube"></i></a>
+          <a class="hover:text-accent-300" href="/twitter"><i class="mdi mdi-twitter"></i></a>
+          <a class="hover:text-accent-300" href="/instagram"><i class="mdi mdi-instagram"></i></a>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 
 </html>

@@ -2,8 +2,10 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="/static/css/pages/home.css">
-
+<div class="bg-dark-500 w-full h-96 text-white">
+  osu.catgirl.moe
+</div>
+<!--
 {% if flash %}
 <div class='noti-banner noti-banner-warning'>
   <div class="container">
@@ -32,6 +34,22 @@
   </div>
 </div>
 {% endif %}
+-->
+<!--
+<div class="p-8 flex flex-none flex-nowrap bg-dark-500 text-white h-72">
+  <div class="w-1/2">
+    <p>
+      We are an osu! private server built from the ground up with many
+      unique features not seen elsewhere - for more information, check
+      out <a href="http://github.com/cmyui/gulag">gulag</a>
+      and <a href="https://github.com/Yo-ru/gulag-web">gulag-web</a>
+      on GitHub - we're fully open source!
+    </p>
+  </div>
+  <div class="w-1/2">
+    <img src="/static/images/pippi.png">
+  </div>
+</div>
 
 <div class="hero splash p-less" id="home-hero">
   <div class="container">

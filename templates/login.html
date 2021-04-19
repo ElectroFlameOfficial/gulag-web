@@ -2,8 +2,18 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="/static/css/pages/auth.css">
-
+<div class="flex justify-center h-full w-full">
+  <div class="rounded-xl self-center text-light bg-dark-700 p-12">
+	  <form action="/login" method="post" class="form-content">
+      <input class="rounded-md border-2 border-dark-700 bg-dark-700 hover:border-dark-800 hover:bg-dark-800 focus:border-accent-500 focus:bg-dark-800 placeholder-dark-50 px-2 py-1 text-light focus:outline-none" id="user" name="username" placeholder="Username" type="text" autocomplete="username" required/>
+      <input class="rounded-md border-2 border-dark-700 bg-dark-700 hover:border-dark-800 hover:bg-dark-800 focus:border-accent-500 focus:bg-dark-800 placeholder-dark-50 px-2 py-1 text-light focus:outline-none" id="pass" name="password" placeholder="Password" type="password" autocomplete="current-password" required/>
+      <button class="rounded bg-accent-500 text-white py-1.5 px-3 hover:bg-accent-800 font-bold text-sm appearance-none focus:outline-none" type="submit">
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+<!--
 <div class="main-block is-marginless is-paddingless is-auth">
   <div class="columns is-reset is-weeb">
     <div class="column title-block">
@@ -47,7 +57,7 @@
           <button type="submit" class="button is-primary">
             Login
           </button>
-          <a href="/forgot" class="button is-info"> <!-- will probably have paths "/forgot/username" and "/forgot/password" -->
+          <a href="/forgot" class="button is-info"> --> <!-- will probably have paths "/forgot/username" and "/forgot/password" --><!--
             Forgot login?
           </a>
         </div>
@@ -61,6 +71,6 @@
 <div class="paper-snackbar is-{{ status }}" style="opacity: 1;">
   {{ flash }}
 </div>
-{% endif %}
+{% endif %}-->
 
 {% endblock %}
