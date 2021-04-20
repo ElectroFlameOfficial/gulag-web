@@ -31,8 +31,9 @@
   <nav class="z-10 flex items-center flex-none w-full px-2 bg-gray-600 flex-nowrap shadow-navbar">
     <div class="w-1/2 text-white">
         <div class="flex float-left h-12 gap-4 text-white">
-          <a class="flex items-center text-4xl" href="/">
-            <i class="mdi mdi-circle-slice-8"></i> <!--TODO: Change this to proper logo-->
+          <a class="flex items-center justify-center text-4xl" href="/">
+            <i class="mdi mdi-circle-slice-8"></i>
+            <div class="hidden ml-1 text-xl font-bold lg:block">{{ appName() }}</div> <!--TODO: Change this to proper logo-->
           </a>
           <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-indigo-300 
           {% if request.path.startswith('/leaderboard') %}text-indigo-300 border-indigo-300
