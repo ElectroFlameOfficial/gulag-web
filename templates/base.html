@@ -33,7 +33,7 @@
         <div class="flex float-left h-12 gap-4 text-white">
           <a class="flex items-center justify-center text-4xl" href="/">
             <i class="mdi mdi-circle-slice-8"></i>
-            <div class="hidden ml-1 text-xl font-bold lg:block">{{ appName() }}</div> <!--TODO: Change this to proper logo-->
+            <div class="hidden ml-1 text-base font-bold lg:block">{{ appName() }}</div> <!--TODO: Change this to proper logo-->
           </a>
           <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-indigo-300 
           {% if request.path.startswith('/leaderboard') %}text-indigo-300 border-indigo-300
@@ -118,11 +118,11 @@
           </div>
       -->
         {% else %}
-        <a class="rounded bg-gray-500 text-white 
+        <a class="rounded bg-gray-500 text-white transition ease
         py-1.5 px-3 hover:bg-gray-400 transform hover:scale-110 font-bold text-sm mr-3" href="/login">
           Log In
         </a>
-        <a class="rounded bg-indigo-500 text-white 
+        <a class="rounded bg-indigo-500 text-white transition ease
         py-1.5 px-3 hover:bg-indigo-800 transform hover:scale-110 font-bold text-sm" href="/register">
           Sign Up
         </a>
