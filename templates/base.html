@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
   
-  <link rel="stylesheet" href="/static/css/tailwind.css">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
 
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
@@ -28,37 +28,36 @@
   </div>
   fuck the modal TODO
 -->
-  <nav class="bg-dark-700 w-full z-10 flex flex-none flex-nowrap items-center shadow-navbar px-2">
+  <nav class="z-10 flex items-center flex-none w-full px-2 bg-gray-600 flex-nowrap shadow-navbar">
     <div class="w-1/2 text-white">
-        <div class="flex float-left text-white gap-4 h-12">
-          <a class="transition duration-200 ease text-4xl flex 
-          transfrom hover:scale-110 items-center" href="/">
+        <div class="flex float-left h-12 gap-4 text-white">
+          <a class="flex items-center text-4xl" href="/">
             <i class="mdi mdi-circle-slice-8"></i> <!--TODO: Change this to proper logo-->
           </a>
-          <a class="transition duration-200 ease flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 
-          {% if request.path.startswith('/leaderboard') %}text-accent-300 border-accent-300
+          <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-indigo-300 
+          {% if request.path.startswith('/leaderboard') %}text-indigo-300 border-indigo-300
           {% else %}border-transparent{% endif %}" href="/leaderboard">
-            <p class="text-sm font-bold hidden md:contents 2xl:text-lg">Leaderboard</p>
+            <p class="hidden text-sm font-bold md:contents 2xl:text-lg">Leaderboard</p>
             <i class="text-xl mdi mdi-poll md:hidden"></i> 
           </a>
           <button x-data="{ open: false }" @mouseover="open = true" @mouseover.away="open = false" 
-          class="transition duration-200 ease flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 appearance-none 
-          focus:outline-none {% if request.path.startswith('/doc') %}text-accent-300 
-          border-accent-300{% else %}border-transparent{% endif %}">
-            <p class="text-sm font-bold hidden md:contents 2xl:text-lg">Information</p>
+          class="flex items-center px-2 border-b-2 mt-0.5 hover:text-indigo-300 appearance-none 
+          focus:outline-none {% if request.path.startswith('/doc') %}text-indigo-300 
+          border-indigo-300{% else %}border-transparent{% endif %}">
+            <p class="hidden text-sm font-bold md:contents 2xl:text-lg">Information</p>
             <i class="text-xl mdi mdi-information-outline md:hidden"></i> 
-            <ul x-show="open" class="absolute z-20 mt-36 list-none text-light text-left text-sm">
-              <li class="px-2 py-2 bg-dark-700 hover:bg-dark-600">
+            <ul x-show="open" class="absolute z-20 text-sm text-left list-none mt-36 text-light">
+              <li class="px-2 py-2 bg-gray-700 hover:bg-gray-600">
                 <a href="/docs">
                   <i class="text-md mdi mdi-file-document-outline"></i> Docs
                 </a>
               </li>
-              <li class="px-2 py-2 bg-dark-700 hover:bg-dark-600">
+              <li class="px-2 py-2 bg-gray-700 hover:bg-gray-600">
                 <a href="/doc/rules">
                   <i class="text-md mdi mdi-clipboard-list-outline"></i> Rules
                 </a>
               </li>
-              <li class="px-2 py-2 bg-dark-700 hover:bg-dark-600 rounded-b-lg">
+              <li class="px-2 py-2 bg-gray-700 rounded-b-lg hover:bg-gray-600">
                 <a href="/discord">
                   <i class="text-md mdi mdi-discord"></i> Discord
                 </a>
@@ -87,9 +86,9 @@
           </div>
             -->
           {% if session.authenticated and session.user_data['is_staff'] %}
-          <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-accent-300 
-          {% if request.path.startswith('/admin') %}text-accent-300 border-accent-300{% else %}border-transparent{% endif %}" href="/admin">
-            <p class="text-sm font-bold hidden md:contents 2xl:text-lg">Admin</p>
+          <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-indigo-300 
+          {% if request.path.startswith('/admin') %}text-indigo-300 border-indigo-300{% else %}border-transparent{% endif %}" href="/admin">
+            <p class="hidden text-sm font-bold md:contents 2xl:text-lg">Admin</p>
             <i class="text-xl mdi mdi-monitor-dashboard md:hidden"></i>
           </a>
           {% endif %}
@@ -99,13 +98,13 @@
       <div class="flex float-right">
         {% if session.authenticated %} 
         <button x-data="{ open: false }" @click="open = true" @click.away="open = false" class="appearance-none focus:outline-none">
-          <img class="rounded-full h-8 w-8" alt="avatar" src="https://a.{{ domain() }}/{{ session.user_data['id'] }}">
-          <p x-show="open" class="text-light absolute z-20 mt-16">henlo</p>
+          <img class="w-8 h-8 rounded-full" alt="avatar" src="https://a.{{ domain() }}/{{ session.user_data['id'] }}">
+          <p x-show="open" class="absolute z-20 mt-16 text-light">henlo</p>
         </button> 
         <!-- TODO: make profile, settings and logout dropdown -->
 
         <!--{{ session.user_data['name'] }} {{ session.user_data['id'] }}
-        <a class="rounded bg-accent-500 text-white py-1 px-3 hover:bg-accent-400 font-bold text-sm" href="/logout">
+        <a class="px-3 py-1 text-sm font-bold text-white bg-indigo-500 rounded hover:bg-indigo-400" href="/logout">
           Logout
         </a>
       <div class="navbar-dropdown">
@@ -118,37 +117,37 @@
           </div>
       -->
         {% else %}
-        <a class="transition duration-200 ease rounded bg-dark-500 text-white 
-        py-1.5 px-3 hover:bg-dark-400 transform hover:scale-110 font-bold text-sm mr-3" href="/login">
+        <a class="rounded bg-gray-500 text-white 
+        py-1.5 px-3 hover:bg-gray-400 transform hover:scale-110 font-bold text-sm mr-3" href="/login">
           Log In
         </a>
-        <a class="transition duration-200 ease rounded bg-accent-500 text-white 
-        py-1.5 px-3 hover:bg-accent-800 transform hover:scale-110 font-bold text-sm" href="/register">
+        <a class="rounded bg-indigo-500 text-white 
+        py-1.5 px-3 hover:bg-indigo-800 transform hover:scale-110 font-bold text-sm" href="/register">
           Sign Up
         </a>
         {% endif %}
       </div>
     </div>
   </nav>
-  <div class="flex flex-col flex-1 overflow-y-auto bg-dark-800 w-full">
+  <div class="flex flex-col flex-1 w-full overflow-y-auto bg-gray-800">
     <div class="flex-grow">
       {% block content %}
       {% endblock %}
     </div>
-    <footer class="flex flex-none flex-nowrap items-center w-full px-4 py-2 bg-dark-700">
+    <footer class="flex items-center flex-none w-full px-4 py-2 bg-gray-700 flex-nowrap">
       <div class="w-1/2">
-        <div class="flex float-left text-sm text-light-900">
-          © 2021&nbsp;<a class="hover:text-accent-300" href="https://{{ domain() }}">
+        <div class="flex float-left text-sm text-white">
+          © 2021&nbsp;<a class="hover:text-indigo-300" href="https://{{ domain() }}">
             {{ domain() }}</a>. All rights removed.
         </div>
       </div>
       <div class="w-1/2">
-        <div class="flex float-right gap-4 text-lg text-light-900">
-          <a class="hover:text-accent-300" href="/github"><i class="mdi mdi-github"></i></a>
-          <a class="hover:text-accent-300" href="/discord"><i class="mdi mdi-discord"></i></a>
-          <a class="hover:text-accent-300" href="/youtube"><i class="mdi mdi-youtube"></i></a>
-          <a class="hover:text-accent-300" href="/twitter"><i class="mdi mdi-twitter"></i></a>
-          <a class="hover:text-accent-300" href="/instagram"><i class="mdi mdi-instagram"></i></a>
+        <div class="flex float-right gap-4 text-lg text-white">
+          <a class="hover:text-indigo-300" href="/github"><i class="mdi mdi-github"></i></a>
+          <a class="hover:text-indigo-300" href="/discord"><i class="mdi mdi-discord"></i></a>
+          <a class="hover:text-indigo-300" href="/youtube"><i class="mdi mdi-youtube"></i></a>
+          <a class="hover:text-indigo-300" href="/twitter"><i class="mdi mdi-twitter"></i></a>
+          <a class="hover:text-indigo-300" href="/instagram"><i class="mdi mdi-instagram"></i></a>
         </div>
       </div>
     </footer>
