@@ -1,0 +1,134 @@
+<nav class="z-10 flex items-center flex-none w-full px-2 bg-gray-600 flex-nowrap shadow-navbar">
+    <div class="w-1/2 text-white">
+        <div class="flex float-left h-12 gap-4 text-white">
+            <a class="flex items-center justify-center text-4xl" href="/">
+                <i class="mdi mdi-circle-slice-8"></i>
+                <div class="hidden ml-1 text-base font-bold lg:block">{{ appName() }}</div>
+                <!--TODO: Change this to proper logo-->
+            </a>
+            <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-indigo-300 
+          {% if request.path.startswith('/leaderboard') %}text-indigo-300 border-indigo-300
+          {% else %}border-transparent{% endif %}" href="/leaderboard">
+                <p class="hidden text-sm font-bold md:contents 2xl:text-lg">Leaderboard</p>
+                <i class="text-xl mdi mdi-poll md:hidden"></i>
+            </a>
+            <button x-data="{ open: false }" @mouseover="open = true" @mouseover.away="open = false" class="flex items-center px-2 border-b-2 mt-0.5 hover:text-indigo-300 appearance-none 
+          focus:outline-none {% if request.path.startswith('/doc') %}text-indigo-300 
+          border-indigo-300{% else %}border-transparent{% endif %}">
+                <p class="hidden text-sm font-bold md:contents 2xl:text-lg">Information</p>
+                <i class="text-xl mdi mdi-information-outline md:hidden"></i>
+                <ul x-show="open" class="absolute z-20 text-sm text-left list-none mt-36 text-light">
+                    <li class="px-2 py-2 bg-gray-700 hover:bg-gray-600">
+                        <a href="/docs">
+                            <i class="text-md mdi mdi-file-document-outline"></i> Docs
+                        </a>
+                    </li>
+                    <li class="px-2 py-2 bg-gray-700 hover:bg-gray-600">
+                        <a href="/doc/rules">
+                            <i class="text-md mdi mdi-clipboard-list-outline"></i> Rules
+                        </a>
+                    </li>
+                    <li class="px-2 py-2 bg-gray-700 rounded-b-lg hover:bg-gray-600">
+                        <a href="/discord">
+                            <i class="text-md mdi mdi-discord"></i> Discord
+                        </a>
+                    </li>
+                </ul>
+            </button>
+            <!-- TODO: make documentation dropdown -->
+            <!-- 
+              <a class="navbar-link">
+            Information
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/docs">
+              Documentation
+            </a>
+            <a class="navbar-item" href="/doc/rules">
+              Rules
+            </a>
+            <a class="navbar-item" href="/discord">
+              Discord
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="https://github.com/Yo-ru/gulag-web/issues/new">
+              Report an issue
+            </a>
+          </div>
+            -->
+            {% if session.authenticated and session.user_data['is_staff'] %}
+            <a class="flex items-center px-2 border-b-2 mt-0.5 hover:text-indigo-300 
+          {% if request.path.startswith('/admin') %}text-indigo-300 border-indigo-300{% else %}border-transparent{% endif %}"
+                href="/admin">
+                <p class="hidden text-sm font-bold md:contents 2xl:text-lg">Admin</p>
+                <i class="text-xl mdi mdi-monitor-dashboard md:hidden"></i>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="w-1/2">
+        <div class="flex float-right">
+            {% if session.authenticated %}
+            <button type="button" x-state:on="Item active" x-state:off="Item inactive" @click="toggle"
+                @mousedown="if (open) $event.preventDefault()" aria-expanded="false" :aria-expanded="open.toString()"
+                class="appearance-none focus:outline-none">
+                <div class="flex items-center" id="logo-and-servername">
+                    <div id="logo">
+                        <img class="w-8 h-8 mr-2 rounded-full"
+                            src="https://a.{{ domain() }}/{{ session.user_data['id'] }}">
+                    </div>
+                    <div id="server-name">
+                        <h1 class="font-medium text-white text-ml">
+                            <span class="block text-white">Varkaria</span>
+                        </h1>
+                    </div>
+                </div>
+                <div x-show="open" transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 translate-y-1"
+                    class="absolute right-0 z-10 w-64 max-w-md px-2 mt-3 mr-6 transform sm:px-0">
+                    <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                        <div class="relative grid gap-6 px-4 py-3 bg-gray-500 sm:gap-8 sm:p-5">
+                            <a href="#" class="flex items-start justify-start p-3 -m-3 rounded-lg hover:bg-gray-600">
+                                <div class="ml-4">
+                                    <p class="text-base font-medium text-gray-200">
+                                        Settings
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </button>
+        <!-- TODO: make profile, settings and logout dropdown -->
+
+        <!--{{ session.user_data['name'] }} {{ session.user_data['id'] }}
+        <a class="px-3 py-1 text-sm font-bold text-white bg-indigo-500 rounded hover:bg-indigo-400" href="/logout">
+          Logout
+        </a>
+      <div class="navbar-dropdown">
+            <a class="navbar-item" href="/u/">
+              Profile
+            </a>
+            <a class="navbar-item" href="/settings">
+              Settings
+            </a>
+          </div>
+      -->
+        {% else %}
+        <a class="rounded bg-gray-500 text-white transition ease
+        py-1.5 px-3 hover:bg-gray-400 transform hover:scale-110 font-bold text-sm mr-3" href="/login">
+            Log In
+        </a>
+        <a class="rounded bg-indigo-500 text-white transition ease
+        py-1.5 px-3 hover:bg-indigo-800 transform hover:scale-110 font-bold text-sm" href="/register">
+            Sign Up
+        </a>
+        {% endif %}
+    </div>
+    </div>
+</nav>
